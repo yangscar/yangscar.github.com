@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>黑苹果安装的普通方法 | 神经咩的生活哲学</title>
+  <meta name="author" content="yangscar">
+  
+  <meta name="description" content="yangscar&#39;s blog | neuroscience | user experience | design">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="黑苹果安装的普通方法"/>
+  <meta property="og:site_name" content="神经咩的生活哲学"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">神经咩的生活哲学</a></h1>
+  <h2><a href="/">设计，技术，大脑</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-10T08:49:00.000Z"><a href="/2013/11/10/hei-ping-guo-an-zhuang-de-pu-tong-fang-fa/">11月 10 2013</a></time>
+      
+      
+  
+    <h1 class="title">黑苹果安装的普通方法</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="为什么装黑苹果">为什么装黑苹果</h1>
+<h3 id="1-_喜欢*nix下的小工具。">1. 喜欢*nix下的小工具。</h3>
+<blockquote>
+<p>前几天师兄找到一个认知心理学课程的网站，里面有很多课件，因为比较多，师兄就把讲义的部分一个个的点击下载。拿到url后想到了wget, 然后直接把整个目录弄了下来，然后分享给师兄。这种小工具的使用上的喜悦是留在*nix阵营最大的理由。</p>
+</blockquote>
+<h3 id="2-_得用PS，AI，FW，PR，AE呀，关键是得用WACOM板">2. 得用PS，AI，FW，PR，AE呀，关键是得用WACOM板</h3>
+<p>虽然Gimp，Inkscape 都是很好，但是以前投奔了Adobe阵营回不来了。<br>我的板子太便宜, 在Linux下驱动老是弄不太好~ 多亏这些货都支持MacOSX。</p>
+<h3 id="3-_资金">3. 资金</h3>
+<p>有笔钱可以买MBP，也可以出去学习，最后选择了出去学习，回报一定要大于MBP，加油!</p>
+<h1 id="安装问题与经验">安装问题与经验</h1>
+<p><a id="more"></a></p>
+<h2 id="1-装系统">1.装系统</h2>
+<p>我的电脑是dell的 OptiPlex 790 一个500G的+一个1T的硬盘。本来是Geforce 405 的显卡，完美驱动，但是HDMI口没驱动，于是换成了Quadro NVS 290，现在完美双屏。装的是10.9懒人版。</p>
+<p>装黑苹果的话，PCBeta 是个好网站，感谢各位大神。<br>09年我用光盘在笔记本上装过一次，这次尝试了U盘和硬盘。<br>总得来说觉得硬盘安装比较推荐，速度快，调整也方便。</p>
+<p><a href="http://bbs.pcbeta.com/viewthread-1169005-1-1.html" target="_blank" rel="external">大神的教程在这里</a></p>
+<p><a href="http://pan.baidu.com/s/1xfZ5X" target="_blank" rel="external">我安装时用到的工具</a></p>
+<h3 id="经验教训">经验教训</h3>
+<p>教程很详细我只谈经验教训</p>
+<ol>
+<li>这种方法安装的话硬盘分区表是MBR的，不是GPT的，之后在Mac系统下不能用磁盘工具进行分区的合并。</li>
+<li>在安装过程中或装好后启动的过程中黑屏的话，可以尝试删除System/Library/Extensions/(SLE)中的 NVDAResman.kext 和 NVDAResmanTesla.kext 备份到其他地方。</li>
+<li>变色龙一定要用新的版本。我的windows版的就没能引导10.9的安装。是用的Mac的变色龙引导的。</li>
+</ol>
+<h2 id="2-装驱动">2.装驱动</h2>
+<p>大神们都会说装系统都是浮云，装驱动才是最麻烦的~<br>我个人运气还好，有几个小经验</p>
+<ol>
+<li>记得用英文搜索你的硬件，会有惊喜的。<a href="www.osx86project.org">OSx86</a>是个好网站。</li>
+</ol>
+<h3 id="显卡驱动">显卡驱动</h3>
+<p><a href="http://bbs.pcbeta.com/viewthread-832974-1-1.html" target="_blank" rel="external">参考</a></p>
+<p>=== @ Windows ===</p>
+<ol>
+<li>先用工具中的AIDA64 在软件的状态栏（或称信息栏点击鼠标右键，选择acpi tool）save dsdt 保存，后缀改成.aml。</li>
+<li>同上右键，Video Debug， Video Bios Dump，提取ROM，保存为 .rom。</li>
+</ol>
+<p>=== @ MacOSX ===</p>
+<ol>
+<li>使用DSDT Editor 打开 那个 aml，F5编译，有Error的话尝试下自动修复，Warning是不管的。我最后还有4个Error，没办法，我全删了。然后编译，发现没有Error了，这也是一种可以尝试的办法。</li>
+<li>打开idsdt 用参考中的方法生成 dsdt.aml, 放到/Extra 里面。</li>
+<li>修改org.chameleon.Boot.plist,我的是这样的~</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">plist</span> <span class="attribute">version</span>=<span class="value">"1.0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dict</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">key</span>&gt;</span>EthernetBuiltIn<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">string</span>&gt;</span>Yes<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">key</span>&gt;</span>GenerateCStates<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">string</span>&gt;</span>Yes<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">key</span>&gt;</span>GeneratePStates<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">string</span>&gt;</span>Yes<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">key</span>&gt;</span>Kernel Flags<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">string</span>&gt;</span>-f npci=0x2000 dart=0<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">plist</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>用 Kext Wizard 把之前你删除的NVDA那两个装上。</li>
+<li>进入磁盘工具，修复系统盘权限。</li>
+<li>重启。</li>
+</ol>
+<h3 id="声卡驱动补充">声卡驱动补充</h3>
+<p>没用dsdt之前声卡是可以驱动的，结果把显卡驱动以后发现没声音了。</p>
+<p>解决方案是把SLE中的AppleHDA.kext 删除，修复权限和缓存，重启。</p>
+<h2 id="有用的链接">有用的链接</h2>
+<blockquote>
+<p> <a href="http://bbs.pcbeta.com/viewthread-1064870-1-1.html" target="_blank" rel="external">导航贴</a></p>
+<p> <a href="http://bbs.pcbeta.com/viewthread-863656-1-1.html" target="_blank" rel="external">新手常见问题</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/折腾/">折腾</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yangscar.me/2013/11/10/hei-ping-guo-an-zhuang-de-pu-tong-fang-fa/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yangscar.me">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Brain/">Brain</a><small>1</small></li>
+  
+    <li><a href="/categories/Psych/">Psych</a><small>1</small></li>
+  
+    <li><a href="/categories/Tech/">Tech</a><small>1</small></li>
+  
+    <li><a href="/categories/UX/">UX</a><small>1</small></li>
+  
+    <li><a href="/categories/技术/">技术</a><small>2</small></li>
+  
+    <li><a href="/categories/折腾/">折腾</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/Math/">Math</a><small>1</small></li>
+  
+    <li><a href="/tags/心理/">心理</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 yangscar
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'yangscarme';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
