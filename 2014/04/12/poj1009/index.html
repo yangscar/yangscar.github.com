@@ -2,65 +2,123 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>Poj1009 | 神经咩的生活哲学</title>
-  <meta name="author" content="yangscar">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <meta name="description" content="yangscar&#39;s blog | neuroscience | user experience | design">
+    <meta name="author" content="yangscar">
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="最近开始玩poj, 做了几个后发现个难的。代码基本上是http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/的。明确思路后改动了两个地方，一个是二分查找Length那块，另外是把原作者对大数据的优化取消了(因为现在自带了对大数据的优化)。
+题目见http://poj.org/problem?id=1009。
+因为e">
+  
+  <meta name="description" content="最近开始玩poj, 做了几个后发现个难的。代码基本上是http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/的。明确思路后改动了两个地方，一个是二分查找Length那块，另外是把原作者对大数据的优化取消了(因为现在自带了对大数据的优化)。
+题目见http://poj.org/problem?id=1009。
+因为e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Poj1009">
+<meta property="og:url" content="http://yangscar.me/2014/04/12/poj1009/">
+<meta property="og:site_name" content="神经咩的生活哲学">
+<meta property="og:description" content="最近开始玩poj, 做了几个后发现个难的。代码基本上是http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/的。明确思路后改动了两个地方，一个是二分查找Length那块，另外是把原作者对大数据的优化取消了(因为现在自带了对大数据的优化)。
+题目见http://poj.org/problem?id=1009。
+因为e">
+<meta property="og:image" content="http://yangscarpic.qiniudn.com/alg.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Poj1009">
+<meta name="twitter:description" content="最近开始玩poj, 做了几个后发现个难的。代码基本上是http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/的。明确思路后改动了两个地方，一个是二分查找Length那块，另外是把原作者对大数据的优化取消了(因为现在自带了对大数据的优化)。
+题目见http://poj.org/problem?id=1009。
+因为e">
 
-  <meta property="og:title" content="Poj1009"/>
-  <meta property="og:site_name" content="神经咩的生活哲学"/>
-
   
-    <meta property="og:image" content="undefined"/>
+    <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
   
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+<!-- mathjax config similar to math.stackexchange -->
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">神经咩的生活哲学</a></h1>
-  <h2><a href="/">设计，技术，大脑</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">神经咩的生活哲学</a></h1>
+    <p><a href="/">设计，技术，大脑</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
   <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-04-12T10:17:53.000Z"><a href="/2014/04/12/poj1009/">4月 12 2014</a></time>
-      
-      
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/04/12/poj1009/">
+  <time datetime="2014-04-12T10:17:53.000Z">
+    4月 12 2014
+  </time>
+</a>
+    
+    
   
     <h1 class="title">Poj1009</h1>
   
 
-    </header>
-    <div class="entry">
-      
-        <p>最近开始玩poj, 做了几个后发现个难的。代码基本上是<a href="http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/" target="_blank" rel="external">http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/</a>的。明确思路后改动了两个地方，一个是二分查找Length那块，另外是把原作者对大数据的优化取消了(因为现在自带了对大数据的优化)。</p>
+  </header>
+  
+  <div class="entry">
+    
+      <p>最近开始玩poj, 做了几个后发现个难的。代码基本上是<a href="http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/" target="_blank" rel="external">http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/</a>的。明确思路后改动了两个地方，一个是二分查找Length那块，另外是把原作者对大数据的优化取消了(因为现在自带了对大数据的优化)。</p>
 <p>题目见<a href="http://poj.org/problem?id=1009" target="_blank" rel="external">http://poj.org/problem?id=1009</a>。</p>
 <p>因为edge其实只和上下左右一个元素相关，于是可以把矩阵展开成三行，然后对开头做特殊处理即可。</p>
 <p><img src="http://yangscarpic.qiniudn.com/alg.jpg" alt="数据结构"></p>
@@ -69,135 +127,61 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;fstream&gt;</span></div><div class="line"><span class="comment">//Thanks to http://leonacwa.github.io/acmicpc/2011/04/27/poj-1009-edge-detection/</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">struct</span> Pair{</div><div class="line">	<span class="keyword">int</span> a, b, s;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Pair p[<span class="number">1024</span>];</div><div class="line"><span class="keyword">int</span> w, px, pos, pre, pres, totalLen;</div><div class="line"></div><div class="line"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="built_in">abs</span>(<span class="keyword">int</span> a){</div><div class="line">	<span class="keyword">return</span> a &gt;= <span class="number">0</span> ? a : -a;</div><div class="line">}</div><div class="line"><span class="keyword">inline</span> <span class="keyword">int</span> max(<span class="keyword">int</span> a, <span class="keyword">int</span> b){</div><div class="line">	<span class="keyword">return</span> a &gt;= b ? a : b;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">inline</span> <span class="keyword">int</span> min(<span class="keyword">int</span> a, <span class="keyword">int</span> b){</div><div class="line">	<span class="keyword">return</span> a &lt;= b ? a : b;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">void</span> printO(<span class="keyword">void</span>){</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; pre &lt;&lt; <span class="string">' '</span> &lt;&lt; pres &lt;&lt; endl;</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getUp(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos - w;</div><div class="line">	<span class="keyword">if</span> (tpos &lt; <span class="number">0</span>)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> getDown(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos + w;</div><div class="line">	<span class="keyword">if</span> (tpos &gt;= totalLen)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getLeft(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos - <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span> (tpos / w != pos / w)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getRight(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos + <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span> (tpos / w != pos / w || tpos &gt;= totalLen)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getLeftUp(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos - w - <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span> (tpos &lt; <span class="number">0</span> || tpos / w + <span class="number">1</span> != pos / w)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getRightUp(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos - w + <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span> (tpos &lt; <span class="number">0</span> || tpos / w == pos / w)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getLeftDown(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos + w - <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span> (tpos / w == pos / w || tpos &gt;= totalLen)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getRightDown(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> tpos = pos + w + <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span> (tpos / w != pos / w + <span class="number">1</span> || tpos &gt;= totalLen)</div><div class="line">		tpos = pos;</div><div class="line">	<span class="keyword">return</span> tpos;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getValue(<span class="keyword">int</span> pos){</div><div class="line">	pos++;</div><div class="line">	<span class="keyword">int</span> lo = <span class="number">1</span>, hi = px - <span class="number">1</span>, mid = px / <span class="number">2</span>;</div><div class="line">	<span class="keyword">while</span> (lo &lt; hi){</div><div class="line">		mid = (lo + hi) &gt;&gt; <span class="number">1</span>;</div><div class="line">		<span class="keyword">if</span> (pos &lt;= p[mid].s)</div><div class="line">			hi = mid;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			lo = mid + <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> p[hi].a;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> getLenPos(<span class="keyword">int</span> pos){</div><div class="line">	pos++;</div><div class="line">	<span class="keyword">int</span> lo = <span class="number">1</span>, hi = px - <span class="number">1</span>, mid = px / <span class="number">2</span>;</div><div class="line">	<span class="keyword">while</span> (lo &lt; hi){</div><div class="line">		mid = (lo + hi)&gt;&gt;<span class="number">1</span>;</div><div class="line">		<span class="keyword">if</span> (pos &lt;= p[mid].s)</div><div class="line">			hi = mid;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			lo = mid + <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> p[hi].s;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getLen(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">return</span> getLenPos(pos) - pos ;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">int</span> getMax(<span class="keyword">int</span> pos){</div><div class="line">	<span class="keyword">int</span> value = getValue(pos);</div><div class="line">	<span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line">  	<span class="keyword">int</span> tpos;</div><div class="line">	tpos = getUp(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = <span class="built_in">abs</span>(value - getValue(tpos));</div><div class="line">	tpos = getDown(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line">	tpos = getLeft(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line">	tpos = getRight(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line">	tpos = getLeftUp(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line">	tpos = getLeftDown(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line">	tpos = getRightUp(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line">	tpos = getRightDown(pos);</div><div class="line">	<span class="keyword">if</span> (pos != tpos)</div><div class="line">		a = max(a, <span class="built_in">abs</span>(value - getValue(tpos)));</div><div class="line"></div><div class="line">	<span class="keyword">return</span> a;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> getMidMax(<span class="keyword">int</span> pos){	<span class="comment">//when a same row;</span></div><div class="line">	<span class="keyword">int</span> value = getValue(pos);</div><div class="line">	<span class="keyword">int</span> a = <span class="built_in">abs</span>(value - getValue(getUp(pos)));</div><div class="line">	<span class="keyword">return</span> max(a, <span class="built_in">abs</span>(value - getValue(getDown(pos))));</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> main(){</div><div class="line">	ifstream <span class="built_in">cin</span>(<span class="string">"input.txt"</span>);</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;w && w){</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; w &lt;&lt; endl;</div><div class="line">		<span class="keyword">int</span> a, b, c;</div><div class="line">		p[<span class="number">0</span>].s = <span class="number">0</span>;</div><div class="line">		px = <span class="number">1</span>;</div><div class="line">		<span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b && !(a==<span class="number">0</span> && b==<span class="number">0</span>)){</div><div class="line">			p[px].a = a;</div><div class="line">			p[px].b = b;</div><div class="line">			p[px].s = p[px - <span class="number">1</span>].s + b;</div><div class="line">			px++;</div><div class="line">		}</div><div class="line">		totalLen = p[px - <span class="number">1</span>].s;</div><div class="line">		<span class="keyword">int</span> value = p[<span class="number">1</span>].a;</div><div class="line">		pres = <span class="number">1</span>;</div><div class="line">		pre = <span class="built_in">abs</span>(value - getValue(getDown(<span class="number">0</span>)));</div><div class="line">		pre = max(pre, <span class="built_in">abs</span>(value - getValue(getRight(<span class="number">0</span>))));</div><div class="line">		pre = max(pre, <span class="built_in">abs</span>(value - getValue(getRightDown(<span class="number">0</span>))));</div><div class="line">		pos = <span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> pos_len, up_len, down_len, min_len,pos_up,pos_down,pos_left;</div><div class="line">		<span class="keyword">while</span> (pos&lt;totalLen){</div><div class="line">			pos_len = getLen(pos);</div><div class="line">			pos_up = getUp(pos);</div><div class="line">			pos_down = getDown(pos);</div><div class="line">			pos_left = getLeft(pos);</div><div class="line">			up_len = getLen(pos_up);</div><div class="line">			<span class="keyword">if</span> (pos_down != pos)</div><div class="line">				down_len = getLen(getDown(pos));</div><div class="line">			<span class="keyword">else</span></div><div class="line">				down_len = pos_len;			  <span class="comment">//special for last row</span></div><div class="line"></div><div class="line">			<span class="keyword">if</span> (pos_up==pos)</div><div class="line">				up_len = up_len &lt;= (w-pos)?up_len:(w-pos);	<span class="comment">// special for first row</span></div><div class="line">			</div><div class="line">			min_len = min(pos_len, min(up_len, down_len));</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (min_len == <span class="number">1</span>){</div><div class="line">				a = getMax(pos);</div><div class="line">				<span class="keyword">if</span> (a == pre){</div><div class="line">					pres++;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span>{</div><div class="line">					printO();</div><div class="line">					pre = a;</div><div class="line">					pres = <span class="number">1</span>;</div><div class="line">				}</div><div class="line">				pos++;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (min_len == <span class="number">2</span>){</div><div class="line">				a = getMax(pos);</div><div class="line">				b = getMax(getRight(pos));</div><div class="line">				<span class="keyword">if</span> (a == pre){</div><div class="line">					pres++;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span>{</div><div class="line">					printO();</div><div class="line">					pre = a;</div><div class="line">					pres = <span class="number">1</span>;</div><div class="line">				}</div><div class="line">				<span class="keyword">if</span> (b == pre){</div><div class="line">					pres++;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span>{</div><div class="line">					printO();</div><div class="line">					pre = b;</div><div class="line">					pres = <span class="number">1</span>;</div><div class="line">				}</div><div class="line"></div><div class="line">				pos += <span class="number">2</span>;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span>{</div><div class="line">				<span class="comment">//more than 3 cols</span></div><div class="line">				a = getMax(pos);</div><div class="line">				b = getMax(pos + min_len - <span class="number">1</span>);</div><div class="line">				c = getMidMax(pos + <span class="number">1</span>);</div><div class="line">				<span class="keyword">if</span> (a == pre){</div><div class="line">					pres++;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span>{</div><div class="line">					printO();</div><div class="line">					pre = a;</div><div class="line">					pres = <span class="number">1</span>;</div><div class="line">				}</div><div class="line"></div><div class="line">				<span class="keyword">if</span> (c == pre){</div><div class="line">					pres += min_len - <span class="number">2</span>;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span>{</div><div class="line">					printO();</div><div class="line">					pre = c;</div><div class="line">					pres = min_len - <span class="number">2</span>;</div><div class="line">				}</div><div class="line"></div><div class="line"></div><div class="line">				<span class="keyword">if</span> (b == pre){</div><div class="line">					pres++;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span>{</div><div class="line">					printO();</div><div class="line">					pre = b;</div><div class="line">					pres = <span class="number">1</span>;</div><div class="line">				}</div><div class="line">				pos += min_len;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		printO();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"0 0"</span> &lt;&lt; endl;</div><div class="line"></div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</div><div class="line">	</div><div class="line">	<span class="comment">//system("Pause");</span></div><div class="line">}</div></pre></td></tr></table></figure>
 
 
+    
+  </div>
+  <footer>
+    
       
-    </div>
-    <footer>
-      
-        
-  
   <div class="categories">
-    <a href="/categories/技术/">技术</a>
+    <a class="categories-link" href="/categories/技术/">技术</a>
   </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/Algorithm/">Algorithm</a>
-  </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
       
-      <div class="clearfix"></div>
-    </footer>
+  <div class="tags">
+    <a class="tags-link" href="/tags/Algorithm/">Algorithm</a>
   </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
 <section id="comment">
-  <h1 class="title">留言</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://yangscar.me/2014/04/12/poj1009/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:yangscar.me">
-  </form>
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">分类</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Brain/">Brain</a><small>1</small></li>
-  
-    <li><a href="/categories/Psych/">Psych</a><small>1</small></li>
-  
-    <li><a href="/categories/Tech/">Tech</a><small>1</small></li>
-  
-    <li><a href="/categories/UX/">UX</a><small>1</small></li>
-  
-    <li><a href="/categories/技术/">技术</a><small>2</small></li>
-  
-    <li><a href="/categories/折腾/">折腾</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">标签</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
-  
-    <li><a href="/tags/Math/">Math</a><small>1</small></li>
-  
-    <li><a href="/tags/心理/">心理</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-</aside>
-    <div class="clearfix"></div>
+  <h1 class="title">评论</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-  <footer id="footer" class="inner"><div class="alignleft">
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
   
-  &copy; 2014 yangscar
+  &copy; 2014 <a href="/">yangscar</a>
   
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
 </div>
 <div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
 
 <script type="text/javascript">
-var disqus_shortname = 'yangscarme';
+  var disqus_shortname = 'yangscarme';
 
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-}());
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
 </script>
 
 
@@ -205,9 +189,9 @@ var disqus_shortname = 'yangscarme';
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
 </script>
 
 </body>
