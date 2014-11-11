@@ -96,6 +96,89 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2014/11/11/AHP/">
+  <time datetime="2014-11-11T12:20:21.000Z">
+    11月 11 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/11/AHP/">AHP</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="神马是AHP">神马是AHP</h1>
+<p>层次分析法（Analytic Hierarchy Process）简称AHP，是一种半定量的方法。假设我们有一个目标y，同时我们有三个标准$x_1, x_2, x_3$，需要评价目标$y$，用矩阵表示就是$Ax=y$。那么我们怎么确定各个x的权重$a_1, a_2, a_3$呢？当然可以老板拍脑袋随便蹦出三个数。但是为了让这个三个数字看起来更有说服力，我们还是使用打分的方法。</p>
+<h3 id="两两比较">两两比较</h3>
+<p>通常的直觉的想法是1-9分你按照$x$对$y$的重要性打分吧，但是这样有个问题，就是如果有10个变量要打分我有一个是1分，一个是9分，但是中间几个就不知道该给几分才好。这是因为人天性是对两两比较比较敏感，很多个放一起往往让人不知所措。于是在层次分析法中使用的是两两比较，总数推荐别超过9个。</p>
+<h3 id="分层模型">分层模型</h3>
+<p>AHP的另一个优点是它可以分层处理问题，当然实际上一般三层比较常用，多了很难解释。从结构上说有点类似于以数据为基础的多层线性回归。</p>
+<h3 id="用AHP选方案？">用AHP选方案？</h3>
+<p>AHP除了能算出来最下面一层各个变量对目标的重要性外，其实还可以用来选方案。如果最下面一层是多个方案，因为权重是可以排序的，那么同样的投入，权重是最大的方案带来的目标改善最大。下面举个选旅游方案的栗子<a href="http://wenku.baidu.com/view/2b2ce4c12cc58bd63186bd4f.html" target="_blank" rel="external">(百度文库)</a><br><!---more---></p>
+<h1 id="怎么算">怎么算</h1>
+<p>假设我们有目标层O(1)：旅游价值。<br>准则层C(2)：景色，费用，居住，饮食。<br>方案层P(3)：帝都，成都，武都。</p>
+<p>然后我们就比较<code>同一层次中每个因素关于上一层的同一个因素的相对重要性</code>。模型中的要素i相对于要素j对上层要素的重要程度，1表示i与j同等重要，3表示i比j略重要，5表示i比j重要，7表示i比j重要很多，9表示i比j极其重要，可以用$w_i/w_j$表示该重要程度，两两比较后可以得到以下矩阵：</p>
+<p><img src="http://yangscarpic.qiniudn.com/20141111AHP-matrix.png" alt="AHP-matrix"></p>
+<p>有个矩阵我们就可以求特征值和特征向量了。如果打分比较合理的话，应该只有一个正的特征值和好几个为0的特征值。$$Aw = \lambda w$$<br>我们通常取最大的那个特征值对应的特征向量为权重向量w。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">% Matlab Code</span></div><div class="line"><span class="matrix">[x, y]</span> = eig(A);</div><div class="line">eigenvalue = <span class="built_in">diag</span>(y);</div><div class="line">lambda = eigenvalue(<span class="number">1</span>); <span class="comment">%the Max one</span></div><div class="line">w = x(:,<span class="number">1</span>);	</div><div class="line">w = <span class="transposed_variable">w.</span>/sum(w); <span class="comment">% regulation</span></div></pre></td></tr></table></figure>
+
+<h3 id="如何评价一致性">如何评价一致性</h3>
+<p>一致性指标CI，当其接近0时一致性较好。<br>$$CI = \frac{\lambda - n}{n-1}$$</p>
+<p>一致性比率CR，CR &lt; 0.1 表示通过一致性检验。</p>
+<p>$$CR = \frac{CI}{RI}$$</p>
+<p>RI是平均一致性指标，是多次随机实验计算的结果，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>阶数</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RI</td>
+<td>0</td>
+<td>0</td>
+<td>0.52</td>
+<td>0.89</td>
+<td>1.12</td>
+<td>1.26</td>
+<td>1.36</td>
+<td>1.41</td>
+<td>1.46</td>
+</tr>
+</tbody>
+</table>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2014/11/08/LeetCode_Note1/">
   <time datetime="2014-11-08T05:39:56.000Z">
     11月 8 2014
@@ -536,43 +619,11 @@
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2013/11/07/first-neuron/">
-  <time datetime="2013-11-07T13:22:00.000Z">
-    11月 7 2013
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2013/11/07/first-neuron/">First Neuron</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>第一篇博文，以写带思，拉动型生产。</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
 
   <nav id="pagination">
   
+  
+    <a href="/page/2/" class="next">下一页</a>
   
   <div class="clearfix"></div>
 </nav>
