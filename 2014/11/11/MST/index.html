@@ -154,45 +154,8 @@
 <p><img src="http://yangscarpic.qiniudn.com/20140115result.new.png" alt=""></p>
 <p>感觉好多了。连了三条边的城市有：石家庄，太原，郑州，兰州，合肥，贵阳，南昌，澳门(忽略这货)。</p>
 <p>其实武汉和郑州都有实力连四条边。话说前一张图跟京广线重合度真高。找不到更多槽点了，也许可以考虑弄一个算法控制枢纽的数量。</p>
-<p>`python</p>
-<pre><code>from mpl_toolkits.basemap <span class="built_in">import</span> Basemap
-<span class="built_in">import</span> matplotlib.pyplot as plt
-<span class="built_in">import</span> matplotlib as mpl
-<span class="built_in">import</span> numpy as np
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> mpl_toolkits.basemap <span class="keyword">import</span> Basemap</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"><span class="keyword">import</span> mst</div><div class="line"></div><div class="line"></div><div class="line">cities, edge = mst.get_mst()</div><div class="line">v1 = [[cities[x].x, cities[x].y] <span class="keyword">for</span> x, y <span class="keyword">in</span> edge]</div><div class="line">v1 = np.array(v1)</div><div class="line">v2 = [[cities[y].x, cities[y].y] <span class="keyword">for</span> x, y <span class="keyword">in</span> edge]</div><div class="line">v2 = np.array(v2)</div><div class="line"></div><div class="line">m = Basemap(width=<span class="number">6000000</span>, height=<span class="number">6000000</span>, projection=<span class="string">'lcc'</span>,</div><div class="line">            resolution=<span class="string">'h'</span>, lat_0=<span class="number">30</span>, lon_0=<span class="number">105</span>)</div><div class="line">m.readshapefile(<span class="string">'bou2_4p'</span>, <span class="string">'conties'</span>)</div><div class="line">m.drawmapboundary(fill_color=<span class="string">'#ffffff'</span>)</div><div class="line">m.fillcontinents(color=<span class="string">'#eeeeee'</span>, lake_color=<span class="string">'#689CD2'</span>, zorder=<span class="number">0</span>)</div><div class="line"></div><div class="line">x1, y1 = m(v1[:, <span class="number">0</span>], v1[:, <span class="number">1</span>])</div><div class="line">x2, y2 = m(v2[:, <span class="number">0</span>], v2[:, <span class="number">1</span>])</div><div class="line">v = [[c.x, c.y] <span class="keyword">for</span> c <span class="keyword">in</span> cities]</div><div class="line">v = np.array(v)</div><div class="line">x, y = m(v[:, <span class="number">0</span>], v[:, <span class="number">1</span>])</div><div class="line">names = [c.name <span class="keyword">for</span> c <span class="keyword">in</span> cities]</div><div class="line">m.scatter(x, y, marker=<span class="string">'o'</span>)</div><div class="line">y_offset    = <span class="number">15.0</span></div><div class="line"></div><div class="line">mpl.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(cities)):</div><div class="line">    plt.text(x[i], y[i]+y_offset, names[i].decode(<span class="string">'utf8'</span>),rotation=<span class="number">20</span>,fontsize=<span class="number">6</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x1)):</div><div class="line">    plt.plot([x1[i], x2[i]], [y1[i], y2[i]])</div><div class="line"></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
 
-<span class="built_in">import</span> mst
-
-
-cities, <span class="variable">edge =</span> mst.get_mst()
-<span class="variable">v1 =</span> [[cities[x].x, cities[x].y] for x, y <span class="keyword">in</span> edge]
-<span class="variable">v1 =</span> np.array(v1)
-<span class="variable">v2 =</span> [[cities[y].x, cities[y].y] for x, y <span class="keyword">in</span> edge]
-<span class="variable">v2 =</span> np.array(v2)
-
-<span class="variable">m =</span> Basemap(<span class="variable">width=</span><span class="number">6000000</span>, <span class="variable">height=</span><span class="number">6000000</span>, <span class="variable">projection=</span>'lcc',
-            <span class="variable">resolution=</span>'h', <span class="variable">lat_0=</span><span class="number">30</span>, <span class="variable">lon_0=</span><span class="number">105</span>)
-m.readshapefile('bou2_4p', 'conties')
-m.drawmapboundary(<span class="variable">fill_color=</span>'<span class="comment">#ffffff')</span>
-m.fillcontinents(<span class="variable">color=</span>'<span class="comment">#eeeeee', lake_color='#689CD2', zorder=0)</span>
-
-x1, <span class="variable">y1 =</span> m(v1[:, <span class="number">0</span>], v1[:, <span class="number">1</span>])
-x2, <span class="variable">y2 =</span> m(v2[:, <span class="number">0</span>], v2[:, <span class="number">1</span>])
-<span class="variable">v =</span> [[c.x, c.y] for c <span class="keyword">in</span> cities]
-<span class="variable">v =</span> np.array(v)
-x, <span class="variable">y =</span> m(v[:, <span class="number">0</span>], v[:, <span class="number">1</span>])
-<span class="variable">names =</span> [c.name for c <span class="keyword">in</span> cities]
-m.scatter(x, y, <span class="variable">marker=</span>'o')
-<span class="variable">y_offset    =</span> <span class="number">15.0</span>
-
-mpl.rcParams['font.sans-serif'] = ['SimHei']
-for i <span class="keyword">in</span> range(len(cities)):
-    plt.text(x[i], y[i]+y_offset, names[i].decode('utf8'),<span class="variable">rotation=</span><span class="number">20</span>,<span class="variable">fontsize=</span><span class="number">6</span>)
-
-for i <span class="keyword">in</span> range(len(x1)):
-    plt.plot([x1[i], x2[i]], [y1[i], y2[i]])
-
-plt.show()
-</code></pre><p>`</p>
 
     
   </div>
