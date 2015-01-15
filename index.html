@@ -124,13 +124,15 @@
 <p><img src="http://yangscarpic.qiniudn.com/20140115result.new.png" alt=""></p>
 <p>感觉好多了。连了三条边的城市有：石家庄，太原，郑州，兰州，合肥，贵阳，南昌，澳门(忽略这货)。</p>
 <p>其实武汉和郑州都有实力连四条边。话说前一张图跟京广线重合度真高。找不到更多槽点了，也许可以考虑弄一个算法控制枢纽的数量。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> mpl_toolkits.basemap <span class="keyword">import</span> Basemap</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> mst</div><div class="line"> </div><div class="line">cities, edge = mst.get_mst()</div><div class="line">v1 = [[cities[x].x, cities[x].y] <span class="keyword">for</span> x, y <span class="keyword">in</span> edge]</div><div class="line">v1 = np.array(v1)</div><div class="line">v2 = [[cities[y].x, cities[y].y] <span class="keyword">for</span> x, y <span class="keyword">in</span> edge]</div><div class="line">v2 = np.array(v2)</div><div class="line"></div><div class="line">m = Basemap(width=<span class="number">6000000</span>, height=<span class="number">6000000</span>, projection=<span class="string">'lcc'</span>,</div><div class="line">            resolution=<span class="string">'h'</span>, lat_0=<span class="number">30</span>, lon_0=<span class="number">105</span>)</div><div class="line">m.readshapefile(<span class="string">'bou2_4p'</span>, <span class="string">'conties'</span>)</div><div class="line">m.drawmapboundary(fill_color=<span class="string">'#ffffff'</span>)</div><div class="line">m.fillcontinents(color=<span class="string">'#eeeeee'</span>, lake_color=<span class="string">'#689CD2'</span>, zorder=<span class="number">0</span>)</div><div class="line"></div><div class="line">x1, y1 = m(v1[:, <span class="number">0</span>], v1[:, <span class="number">1</span>])</div><div class="line">x2, y2 = m(v2[:, <span class="number">0</span>], v2[:, <span class="number">1</span>])</div><div class="line">v = [[c.x, c.y] <span class="keyword">for</span> c <span class="keyword">in</span> cities]</div><div class="line">v = np.array(v)</div><div class="line">x, y = m(v[:, <span class="number">0</span>], v[:, <span class="number">1</span>])</div><div class="line">names = [c.name <span class="keyword">for</span> c <span class="keyword">in</span> cities]</div><div class="line">m.scatter(x, y, marker=<span class="string">'o'</span>)</div><div class="line">y_offset    = <span class="number">15.0</span></div><div class="line"></div><div class="line">mpl.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(cities)):</div><div class="line">    plt.text(x[i], y[i]+y_offset, names[i].decode(<span class="string">'utf8'</span>),rotation=<span class="number">20</span>,fontsize=<span class="number">6</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x1)):</div><div class="line">    plt.plot([x1[i], x2[i]], [y1[i], y2[i]])</div><div class="line"></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-
 
     
   </div>
   <footer class="end-sep">
     
+      
+        <div class="alignleft">
+          <a href="/2014/11/11/MST/#more" class="more-link">阅读全文</a>
+        </div>
       
       
     
@@ -166,54 +168,15 @@
 <h3 id="分层模型">分层模型</h3>
 <p>AHP的另一个优点是它可以分层处理问题，当然实际上一般三层比较常用，多了很难解释。从结构上说有点类似于以数据为基础的多层线性回归。</p>
 <h3 id="用AHP选方案？">用AHP选方案？</h3>
-<p>AHP除了能算出来最下面一层各个变量对目标的重要性外，其实还可以用来选方案。如果最下面一层是多个方案，因为权重是可以排序的，那么同样的投入，权重是最大的方案带来的目标改善最大。下面举个选旅游方案的栗子<a href="http://wenku.baidu.com/view/2b2ce4c12cc58bd63186bd4f.html" target="_blank" rel="external">(百度文库)</a><br><!---more---></p>
-<h1 id="怎么算">怎么算</h1>
-<p>假设我们有目标层O(1)：旅游价值。<br>准则层C(2)：景色，费用，居住，饮食。<br>方案层P(3)：帝都，成都，武都。</p>
-<p>然后我们就比较<code>同一层次中每个因素关于上一层的同一个因素的相对重要性</code>。模型中的要素i相对于要素j对上层要素的重要程度，1表示i与j同等重要，3表示i比j略重要，5表示i比j重要，7表示i比j重要很多，9表示i比j极其重要，可以用$w_i/w_j$表示该重要程度，两两比较后可以得到以下矩阵：</p>
-<p><img src="http://yangscarpic.qiniudn.com/20141111AHP-matrix.png" alt="AHP-matrix"></p>
-<p>有个矩阵我们就可以求特征值和特征向量了。如果打分比较合理的话，应该只有一个正的特征值和好几个为0的特征值。$$Aw = \lambda w$$<br>我们通常取最大的那个特征值对应的特征向量为权重向量w。</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">% Matlab Code</span></div><div class="line"><span class="matrix">[x, y]</span> = eig(A);</div><div class="line">eigenvalue = <span class="built_in">diag</span>(y);</div><div class="line">lambda = eigenvalue(<span class="number">1</span>); <span class="comment">%the Max one</span></div><div class="line">w = x(:,<span class="number">1</span>);	</div><div class="line">w = <span class="transposed_variable">w.</span>/sum(w); <span class="comment">% regularization</span></div></pre></td></tr></table></figure>
-
-<h3 id="如何评价一致性">如何评价一致性</h3>
-<p>一致性指标CI，当其接近0时一致性较好。<br>$$CI = \frac{\lambda - n}{n-1}$$</p>
-<p>一致性比率CR，CR &lt; 0.1 表示通过一致性检验。</p>
-<p>$$CR = \frac{CI}{RI}$$</p>
-<p>RI是平均一致性指标，是多次随机实验计算的结果，如下表：</p>
-<table>
-<thead>
-<tr>
-<th>阶数</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-<th>8</th>
-<th>9</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RI</td>
-<td>0</td>
-<td>0</td>
-<td>0.52</td>
-<td>0.89</td>
-<td>1.12</td>
-<td>1.26</td>
-<td>1.36</td>
-<td>1.41</td>
-<td>1.46</td>
-</tr>
-</tbody>
-</table>
-
+<p>AHP除了能算出来最下面一层各个变量对目标的重要性外，其实还可以用来选方案。如果最下面一层是多个方案，因为权重是可以排序的，那么同样的投入，权重是最大的方案带来的目标改善最大。下面举个选旅游方案的栗子<a href="http://wenku.baidu.com/view/2b2ce4c12cc58bd63186bd4f.html" target="_blank" rel="external">(百度文库)</a><br>
     
   </div>
   <footer class="end-sep">
     
+      
+        <div class="alignleft">
+          <a href="/2014/11/11/AHP/#more" class="more-link">阅读全文</a>
+        </div>
       
       
     
