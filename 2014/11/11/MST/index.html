@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>中国省会城市们的最小生成树 | 神经咩的生活哲学</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="yangscar">
+  
+  
+    <meta name="description" content="MST
+(当一个图是连通的时候)最小生成树就是一颗利用已知边把所有点连起来，并且保证边的总长度最短的一颗树。
+1这里我们假设所有的城市之间边就是一条直线。
+
+开始画出来的图是这样的。
+
+然后。。。擦，为啥从拉萨到乌鲁木齐比从兰州还近？然后我意识到这几个西部城市之间距离太远，由于我没有使用劣弧计算产生了较大的偏差。
+然后老老实实算劣弧：
+123456设经度是	theta 纬度是 phix = cos">
+  
+  <meta name="description" content="MST
+(当一个图是连通的时候)最小生成树就是一颗利用已知边把所有点连起来，并且保证边的总长度最短的一颗树。
+1这里我们假设所有的城市之间边就是一条直线。
+
+开始画出来的图是这样的。
+
+然后。。。擦，为啥从拉萨到乌鲁木齐比从兰州还近？然后我意识到这几个西部城市之间距离太远，由于我没有使用劣弧计算产生了较大的偏差。
+然后老老实实算劣弧：
+123456设经度是	theta 纬度是 phix = cos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中国省会城市们的最小生成树">
+<meta property="og:url" content="http://yangscar.me/2014/11/11/MST/">
+<meta property="og:site_name" content="神经咩的生活哲学">
+<meta property="og:description" content="MST
+(当一个图是连通的时候)最小生成树就是一颗利用已知边把所有点连起来，并且保证边的总长度最短的一颗树。
+1这里我们假设所有的城市之间边就是一条直线。
+
+开始画出来的图是这样的。
+
+然后。。。擦，为啥从拉萨到乌鲁木齐比从兰州还近？然后我意识到这几个西部城市之间距离太远，由于我没有使用劣弧计算产生了较大的偏差。
+然后老老实实算劣弧：
+123456设经度是	theta 纬度是 phix = cos">
+<meta property="og:image" content="http://yangscarpic.qiniudn.com/20140115result.old.png">
+<meta property="og:image" content="http://yangscarpic.qiniudn.com/20140115result.new.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中国省会城市们的最小生成树">
+<meta name="twitter:description" content="MST
+(当一个图是连通的时候)最小生成树就是一颗利用已知边把所有点连起来，并且保证边的总长度最短的一颗树。
+1这里我们假设所有的城市之间边就是一条直线。
+
+开始画出来的图是这样的。
+
+然后。。。擦，为啥从拉萨到乌鲁木齐比从兰州还近？然后我意识到这几个西部城市之间距离太远，由于我没有使用劣弧计算产生了较大的偏差。
+然后老老实实算劣弧：
+123456设经度是	theta 纬度是 phix = cos">
+
+  
+    <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">神经咩的生活哲学</a></h1>
+    <p><a href="/">设计，技术，大脑</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/11/MST/">
+  <time datetime="2014-11-11T12:20:21.000Z">
+    11月 11 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">中国省会城市们的最小生成树</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="MST">MST</h1>
+<p>(当一个图是连通的时候)最小生成树就是一颗利用已知边把所有点连起来，并且保证边的总长度最短的一颗树。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这里我们假设所有的城市之间边就是一条直线。</div></pre></td></tr></table></figure>
+
+<p>开始画出来的图是这样的。</p>
+<p><img src="http://yangscarpic.qiniudn.com/20140115result.old.png" alt=""></p>
+<p>然后。。。擦，为啥从拉萨到乌鲁木齐比从兰州还近？然后我意识到这几个西部城市之间距离太远，由于我没有使用劣弧计算产生了较大的偏差。</p>
+<p>然后老老实实算劣弧：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">设经度是	theta 纬度是 phi</div><div class="line">x = <span class="built_in">cos</span>(phi)*<span class="built_in">cos</span>(theta)</div><div class="line">y = <span class="built_in">cos</span>(phi)*<span class="built_in">sin</span>(theta)</div><div class="line">z = <span class="built_in">sin</span>(phi)</div><div class="line"></div><div class="line">劣弧角度 = <span class="built_in">acos</span>(&lt;v1,v2&gt;)<span class="comment">// 求个内积</span></div></pre></td></tr></table></figure>
+
+<p><img src="http://yangscarpic.qiniudn.com/20140115result.new.png" alt=""></p>
+<p>感觉好多了。连了三条边的城市有：石家庄，太原，郑州，兰州，合肥，贵阳，南昌，澳门(忽略这货)。</p>
+<p>其实武汉和郑州都有实力连四条边。话说前一张图跟京广线重合度真高。找不到更多槽点了，也许可以考虑弄一个算法控制枢纽的数量。</p>
+<p>`python</p>
+<pre><code>from mpl_toolkits.basemap <span class="built_in">import</span> Basemap
+<span class="built_in">import</span> matplotlib.pyplot as plt
+<span class="built_in">import</span> matplotlib as mpl
+<span class="built_in">import</span> numpy as np
+
+<span class="built_in">import</span> mst
+
+
+cities, <span class="variable">edge =</span> mst.get_mst()
+<span class="variable">v1 =</span> [[cities[x].x, cities[x].y] for x, y <span class="keyword">in</span> edge]
+<span class="variable">v1 =</span> np.array(v1)
+<span class="variable">v2 =</span> [[cities[y].x, cities[y].y] for x, y <span class="keyword">in</span> edge]
+<span class="variable">v2 =</span> np.array(v2)
+
+<span class="variable">m =</span> Basemap(<span class="variable">width=</span><span class="number">6000000</span>, <span class="variable">height=</span><span class="number">6000000</span>, <span class="variable">projection=</span>'lcc',
+            <span class="variable">resolution=</span>'h', <span class="variable">lat_0=</span><span class="number">30</span>, <span class="variable">lon_0=</span><span class="number">105</span>)
+m.readshapefile('bou2_4p', 'conties')
+m.drawmapboundary(<span class="variable">fill_color=</span>'<span class="comment">#ffffff')</span>
+m.fillcontinents(<span class="variable">color=</span>'<span class="comment">#eeeeee', lake_color='#689CD2', zorder=0)</span>
+
+x1, <span class="variable">y1 =</span> m(v1[:, <span class="number">0</span>], v1[:, <span class="number">1</span>])
+x2, <span class="variable">y2 =</span> m(v2[:, <span class="number">0</span>], v2[:, <span class="number">1</span>])
+<span class="variable">v =</span> [[c.x, c.y] for c <span class="keyword">in</span> cities]
+<span class="variable">v =</span> np.array(v)
+x, <span class="variable">y =</span> m(v[:, <span class="number">0</span>], v[:, <span class="number">1</span>])
+<span class="variable">names =</span> [c.name for c <span class="keyword">in</span> cities]
+m.scatter(x, y, <span class="variable">marker=</span>'o')
+<span class="variable">y_offset    =</span> <span class="number">15.0</span>
+
+mpl.rcParams['font.sans-serif'] = ['SimHei']
+for i <span class="keyword">in</span> range(len(cities)):
+    plt.text(x[i], y[i]+y_offset, names[i].decode('utf8'),<span class="variable">rotation=</span><span class="number">20</span>,<span class="variable">fontsize=</span><span class="number">6</span>)
+
+for i <span class="keyword">in</span> range(len(x1)):
+    plt.plot([x1[i], x2[i]], [y1[i], y2[i]])
+
+plt.show()
+</code></pre><p>`</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tech/">Tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Algorithms/">Algorithms</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">yangscar</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'yangscarme';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
