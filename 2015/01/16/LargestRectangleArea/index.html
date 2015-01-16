@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>柱状图下矩形的最大面积LargestRectangleArea | 神经咩的生活哲学</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="yangscar">
+  
+  
+    <meta name="description" content="题目
+Largest Rectangle in Historgram. 给你一组从左至右排列的柱子的高度，其中每个柱子宽1并且紧靠，要求算出这群柱子下面最大的矩形面积。比如给你 [2,1,5,6,2,3]，  最大面积由高为5和6的两个柱子组成=10。Vespa 同学说的这段话非常有道理
+
+每次想算法题，我的基本思路就是，首先先想最直观的解法，不行，就再想分治或者动规这种，再不行，就从数据结构下手">
+  
+  <meta name="description" content="题目
+Largest Rectangle in Historgram. 给你一组从左至右排列的柱子的高度，其中每个柱子宽1并且紧靠，要求算出这群柱子下面最大的矩形面积。比如给你 [2,1,5,6,2,3]，  最大面积由高为5和6的两个柱子组成=10。Vespa 同学说的这段话非常有道理
+
+每次想算法题，我的基本思路就是，首先先想最直观的解法，不行，就再想分治或者动规这种，再不行，就从数据结构下手">
+<meta property="og:type" content="article">
+<meta property="og:title" content="柱状图下矩形的最大面积LargestRectangleArea">
+<meta property="og:url" content="http://yangscar.me/2015/01/16/LargestRectangleArea/">
+<meta property="og:site_name" content="神经咩的生活哲学">
+<meta property="og:description" content="题目
+Largest Rectangle in Historgram. 给你一组从左至右排列的柱子的高度，其中每个柱子宽1并且紧靠，要求算出这群柱子下面最大的矩形面积。比如给你 [2,1,5,6,2,3]，  最大面积由高为5和6的两个柱子组成=10。Vespa 同学说的这段话非常有道理
+
+每次想算法题，我的基本思路就是，首先先想最直观的解法，不行，就再想分治或者动规这种，再不行，就从数据结构下手">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="柱状图下矩形的最大面积LargestRectangleArea">
+<meta name="twitter:description" content="题目
+Largest Rectangle in Historgram. 给你一组从左至右排列的柱子的高度，其中每个柱子宽1并且紧靠，要求算出这群柱子下面最大的矩形面积。比如给你 [2,1,5,6,2,3]，  最大面积由高为5和6的两个柱子组成=10。Vespa 同学说的这段话非常有道理
+
+每次想算法题，我的基本思路就是，首先先想最直观的解法，不行，就再想分治或者动规这种，再不行，就从数据结构下手">
+
+  
+    <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">神经咩的生活哲学</a></h1>
+    <p><a href="/">设计，技术，大脑</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/01/16/LargestRectangleArea/">
+  <time datetime="2015-01-16T04:57:00.000Z">
+    1月 16 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">柱状图下矩形的最大面积LargestRectangleArea</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="题目">题目</h1>
+<p><a href="https://oj.leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="external">Largest Rectangle in Historgram.</a> 给你一组从左至右排列的柱子的高度，其中每个柱子宽1并且紧靠，要求算出这群柱子下面最大的矩形面积。<br>比如给你 [2,1,5,6,2,3]，  最大面积由高为5和6的两个柱子组成=10。<br><a href="http://www.kylen314.com/archives/5761" target="_blank" rel="external">Vespa 同学说的这段话非常有道理</a></p>
+<blockquote>
+<p>每次想算法题，我的基本思路就是，首先先想最直观的解法，不行，就再想分治或者动规这种，再不行，就从数据结构下手！其实这类算法题，根据我的经验，你只要有意识去想分治的思想，如果分治解法存在，那么你总可以想到这个解法的。</p>
+</blockquote>
+<h1 id="暴力法">暴力法</h1>
+<p>暴力法是一切的基础，咳咳。<br>我们可以找以每个柱子为最小高度可以获得的最大面积，所有柱子中最大的最大面积就是答案。<br>O(n^2)用两层循环，在内循环中每次从a[i]开始向左向右扩张，直到遇到第一个比a[i]小的数a[j],作为边界。这样就可以求得a[i]*n 为最小面积，n是扩张的长度。</p>
+<h1 id="分治法">分治法</h1>
+<p>每次找到给定子问题中高度最小的地方。<br>那么最大面积就是 = max(左边的最大值，amin*length, 右边的最大值)</p>
+<p>当然极端情况下会超时。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span>(<span class="keyword">int</span>[] height) {</div><div class="line">       <span class="keyword">return</span> largestRect(height, <span class="number">0</span>, height.length-<span class="number">1</span>);</div><div class="line">}</div><div class="line">   </div><div class="line">   <span class="keyword">private</span> <span class="keyword">int</span> <span class="title">largestRect</span>(<span class="keyword">int</span>[] height, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi){</div><div class="line">       <span class="keyword">if</span> (hi-lo &lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> minIdx = minIndex(height,lo,hi);</div><div class="line">       <span class="keyword">int</span> valueM = height[minIdx]*height.length;</div><div class="line">       <span class="keyword">int</span> valueL = largestRect(height, lo, minIdx-<span class="number">1</span>);</div><div class="line">       <span class="keyword">int</span> valueH = largestRect(height, minIdx+<span class="number">1</span>, hi);</div><div class="line">       <span class="keyword">return</span> valueH &gt; valueL? Math.max(valueH, valueM): Math.max(valueL, valueM);</div><div class="line">   }</div><div class="line">   </div><div class="line">   <span class="keyword">private</span> <span class="keyword">int</span> <span class="title">minIndex</span>(<span class="keyword">int</span>[] height, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi){</div><div class="line">       <span class="keyword">if</span> (hi-lo &lt;<span class="number">1</span>) <span class="keyword">return</span> lo;</div><div class="line">       <span class="keyword">int</span> index, i;</div><div class="line">       <span class="keyword">for</span> (i =lo+<span class="number">1</span>, index = lo; i &lt;= hi; i++){</div><div class="line">           <span class="keyword">if</span> (height[i] &lt; height[index])</div><div class="line">               index = i;</div><div class="line">       }</div><div class="line">       <span class="keyword">return</span> index;</div><div class="line">   }</div></pre></td></tr></table></figure>
+
+<h1 id="堆栈法">堆栈法</h1>
+<a id="more"></a>
+
+<p>需要我们回过头来审视暴力法，其实我们每次只需要找到a[i]的左右边界即可。而在暴力法的内循环中其实我们已经做了一些a[i]之间的大小比较，而这些信息对于我们之后寻找边界是很有用的。</p>
+<p>使用堆栈法，我们维持一个单调非减的堆栈，当a[i] &gt;= a[top] 我们加入堆栈。</p>
+<p>当a[i] &lt; a[top]的时候我们找到了以a[top]为最小值的右界i-1。那么以a[top]为最小值的左界在哪呢？答案是栈中 a[top] 下面那个+1，因为a[top]下面那个是第一个小于a[top]的。那么我们就可以把 top 给 pop 出来，依据其左右边界算出以a[top]为最小高度能获得的最大矩形面积。</p>
+<p>针对新的a[top]我们重复以上过程直到 a[i] &gt;= a[top] ，a[i]入栈 。</p>
+<p>我们看个栗子，以max_list表示记录每个位置的max_area。<br>a = [2,3,3,4,2,4,1]。//我们人为的再最后加个0，方便最后所有的出栈。</p>
+<ol>
+<li>i = 0，a[0]入栈，stack = [0]。</li>
+<li>i = 1，a[1]入栈，stack = [0, 1]。</li>
+<li>i = 2，a[2]入栈，stack = [0, 1, 2]。</li>
+<li>i = 3，a[3]入栈，stack = [0, 1, 2, 3]。</li>
+<li>i = 4，此时a[4] &lt; a[top] = 3。<ol>
+<li>pop a[3]，max_list[3] = 4* (3-(2+1)+1) = 4</li>
+<li>pop a[2]，max_list[2] = 3* (3-(1+1)+1) = 6 //注意这里top前一个也是3我们将他也看做是左界。</li>
+<li>pop a[1]，max_list[1] = 3* (3-(0+1)+1) = 9</li>
+<li>a[4] 入栈，stack = [0, 4]。</li>
+</ol>
+</li>
+<li>i = 5，a[5]入栈，stack = [0, 4, 5]</li>
+<li>i = 6，此时a[6] &lt; a[top] = 4。<ol>
+<li>pop a[5]，max_list[5] = 4* (5-(4+1)+1) = 4</li>
+<li>pop a[4]，max_list[4] = 2* (5-(0+1)+1) = 10 //注意这里top前一个也是2我们将他也看做是左界。</li>
+<li>pop a[0]，max_list[0] = 2* (5-0+1) = 12 // 此时栈已空，所以左界为0。</li>
+<li>a[6] 入栈，stack = [6]。</li>
+</ol>
+</li>
+<li>i = 7，此时a[7] &lt; a[top] = 1。//a[7] = 0<ol>
+<li>pop a[7]，max_list[7] = 1* (6-0+1) = 7 // 此时栈已空，所以左界为0。</li>
+</ol>
+</li>
+</ol>
+<p>所以最大值是max_list[0] = 12。注意到我们利用的最重要的性质是，栈中top 下面那个一定是第一个左边&lt;=a[top]的位置(有大于的肯定早就被<code>弄</code>出来了)。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span>(<span class="keyword">int</span>[] height) {</div><div class="line">    </div><div class="line">    Stack&lt;Integer&gt; s = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>, l;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= height.length; i++){</div><div class="line">        <span class="keyword">while</span> (!s.empty() && ( i == height.length || height[i] &lt; height[s.peek()] )){</div><div class="line">            <span class="keyword">int</span> top = s.pop();</div><div class="line">            <span class="keyword">if</span> (s.empty())</div><div class="line">                l = <span class="number">0</span>;</div><div class="line">            <span class="keyword">else</span> </div><div class="line">                l = s.peek()+<span class="number">1</span>;</div><div class="line">            maxArea = Math.max(maxArea, (i-l)*height[top]);</div><div class="line">        }</div><div class="line">        s.push(i);</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> maxArea;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tech/">Tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Algorithms/">Algorithms</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">yangscar</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'yangscarme';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
