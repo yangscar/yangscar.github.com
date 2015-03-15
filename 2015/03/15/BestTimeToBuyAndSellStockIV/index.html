@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>LeetCode 买股票系列之Best Time To Buy And Sell Stock IV | 神经咩的生活哲学</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="yangscar">
+  
+  
+    <meta name="description" content="题目
+给定一个int[] prices，以及最多可以进行k轮交易(一轮表示分别买一次卖一次)。每天可以进行一次交易，问最多能取得多大的利润。链接
+解释
+这个其实跟买股票系列之二很像，即是在prices.length 这么多个price中选出2k个，看哪种选法利润更大。当2k &amp;gt; prices.length 时，本题就可化归为买股票系列之二(可以选任意个)。
+状态转移方程
+设f[i][j] 表">
+  
+  <meta name="description" content="题目
+给定一个int[] prices，以及最多可以进行k轮交易(一轮表示分别买一次卖一次)。每天可以进行一次交易，问最多能取得多大的利润。链接
+解释
+这个其实跟买股票系列之二很像，即是在prices.length 这么多个price中选出2k个，看哪种选法利润更大。当2k &gt; prices.length 时，本题就可化归为买股票系列之二(可以选任意个)。
+状态转移方程
+设f[i][j] 表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 买股票系列之Best Time To Buy And Sell Stock IV">
+<meta property="og:url" content="http://yangscar.me/2015/03/15/BestTimeToBuyAndSellStockIV/">
+<meta property="og:site_name" content="神经咩的生活哲学">
+<meta property="og:description" content="题目
+给定一个int[] prices，以及最多可以进行k轮交易(一轮表示分别买一次卖一次)。每天可以进行一次交易，问最多能取得多大的利润。链接
+解释
+这个其实跟买股票系列之二很像，即是在prices.length 这么多个price中选出2k个，看哪种选法利润更大。当2k &gt; prices.length 时，本题就可化归为买股票系列之二(可以选任意个)。
+状态转移方程
+设f[i][j] 表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 买股票系列之Best Time To Buy And Sell Stock IV">
+<meta name="twitter:description" content="题目
+给定一个int[] prices，以及最多可以进行k轮交易(一轮表示分别买一次卖一次)。每天可以进行一次交易，问最多能取得多大的利润。链接
+解释
+这个其实跟买股票系列之二很像，即是在prices.length 这么多个price中选出2k个，看哪种选法利润更大。当2k &gt; prices.length 时，本题就可化归为买股票系列之二(可以选任意个)。
+状态转移方程
+设f[i][j] 表">
+
+  
+    <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">神经咩的生活哲学</a></h1>
+    <p><a href="/">设计，技术，大脑</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/15/BestTimeToBuyAndSellStockIV/">
+  <time datetime="2015-03-15T07:39:00.000Z">
+    3月 15 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">LeetCode 买股票系列之Best Time To Buy And Sell Stock IV</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="题目">题目</h1>
+<p>给定一个int[] prices，以及最多可以进行k轮交易(一轮表示分别买一次卖一次)。<br>每天可以进行一次交易，问最多能取得多大的利润。<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="external">链接</a></p>
+<h1 id="解释">解释</h1>
+<p>这个其实跟<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="external">买股票系列之二</a>很像，即是在prices.length 这么多个price中选出2<em>k个，看哪种选法利润更大。当2</em>k &gt; prices.length 时，本题就可化归为买股票系列之二(可以选任意个)。</p>
+<h1 id="状态转移方程">状态转移方程</h1>
+<p>设<code>f[i][j]</code> 表示在[0, i]中选price，进行到第j次交易能获得的最大利润。</p>
+<p><code>f[i][j] &gt;= f[i-1][j]   (1)</code><br><code>f[i][j] &gt;= f[i][j-1] + prices[i]*{1,-1}[j%2]   (2)</code><br>其中不等式(1)表明我多增加了一个选项，能获得的最大利润肯定不小于少一个选项的情况。<br>不等式(2)表示我每次用prices[i]去尝试，看能不能比之前获得更大的利润。实际上在交易j处，我们可以尝试prices[j-1,…,i]，但是i之前的我们在之前的步骤中已经尝试过了所以不必重复。<br>最后需要注意的一点是，选择的位置&lt;=2<em>k。而如果我们到达第i+1个交易位置，这是我们只能用prices[i]去尝试，没有更多的选择，所以此处<br>`f[i][i+1] = f[i][j-1] + prices[i]</em>{1,-1}[j%2]`</p>
+<p>为了处理边缘情况，我们令f[i][0] = 0，这样当k == 0 时则返回0。</p>
+<p>同时当j = 1时:</p>
+<p><code>f[i][j]&gt;= prices[i]*{1,-1}[j%2] = f[i][0] + prices*{1,-1}[j%2]</code></p>
+<h1 id="代码如下">代码如下</h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span>(<span class="keyword">int</span> k, <span class="keyword">int</span>[] prices) {</div><div class="line">    <span class="keyword">if</span> (k&gt;prices.length/<span class="number">2</span>) <span class="keyword">return</span> maxProfit2(prices);<span class="comment">//买股票系列II</span></div><div class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>*k+<span class="number">1</span>];</div><div class="line">    <span class="keyword">int</span>[] sell = <span class="keyword">new</span> <span class="keyword">int</span>[]{<span class="number">1</span>,-<span class="number">1</span>};</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; prices.length;i++){</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>; j &lt;= Math.min(<span class="number">2</span>*k,i+<span class="number">1</span>);j++)</div><div class="line">            <span class="keyword">if</span> (j==i+<span class="number">1</span>)</div><div class="line">                dp[j] = dp[j-<span class="number">1</span>] + prices[i]*sell[j%<span class="number">2</span>];</div><div class="line">            <span class="keyword">else</span></div><div class="line">                dp[j] = Math.max(dp[j], dp[j-<span class="number">1</span>]+prices[i]*sell[j%<span class="number">2</span>]);</div><div class="line">    }</div><div class="line">    <span class="keyword">int</span> max_profit = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;= <span class="number">2</span>*k; i++){</div><div class="line">        max_profit=Math.max(max_profit,dp[i]);</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> max_profit;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tech/">Tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Algorithms/">Algorithms</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">yangscar</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'yangscarme';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
