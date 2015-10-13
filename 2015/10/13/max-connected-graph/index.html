@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>极大全连通子图 | 神经咩的生活哲学</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="yangscar">
+  
+  
+    <meta name="description" content="定义
+
+连通图: 图中任意两点均是可达的。
+子图: 一个图的一部分。
+全连通图:一个图中的每个点与图中任意其他点均有边连接。
+极大全连通子图: 在全连通子图上添加图上其他任意一点，均破坏其全连通性质。
+
+问题
+给一个连通图,找出其中所有的极大全连通子图，如下图中 {1,2,3},{3,4},{4,5}都是极大全连通子图。
+初步想法
+从一个点开始遍历，扩展全连通子图，直至不能继续扩展。同时将访问过的">
+  
+  <meta name="description" content="定义
+
+连通图: 图中任意两点均是可达的。
+子图: 一个图的一部分。
+全连通图:一个图中的每个点与图中任意其他点均有边连接。
+极大全连通子图: 在全连通子图上添加图上其他任意一点，均破坏其全连通性质。
+
+问题
+给一个连通图,找出其中所有的极大全连通子图，如下图中 {1,2,3},{3,4},{4,5}都是极大全连通子图。
+初步想法
+从一个点开始遍历，扩展全连通子图，直至不能继续扩展。同时将访问过的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极大全连通子图">
+<meta property="og:url" content="http://yangscar.me/2015/10/13/max-connected-graph/">
+<meta property="og:site_name" content="神经咩的生活哲学">
+<meta property="og:description" content="定义
+
+连通图: 图中任意两点均是可达的。
+子图: 一个图的一部分。
+全连通图:一个图中的每个点与图中任意其他点均有边连接。
+极大全连通子图: 在全连通子图上添加图上其他任意一点，均破坏其全连通性质。
+
+问题
+给一个连通图,找出其中所有的极大全连通子图，如下图中 {1,2,3},{3,4},{4,5}都是极大全连通子图。
+初步想法
+从一个点开始遍历，扩展全连通子图，直至不能继续扩展。同时将访问过的">
+<meta property="og:image" content="http://7b1g0f.com1.z0.glb.clouddn.com/20151013map1.png">
+<meta property="og:image" content="http://7b1g0f.com1.z0.glb.clouddn.com/20151013map2.JPG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极大全连通子图">
+<meta name="twitter:description" content="定义
+
+连通图: 图中任意两点均是可达的。
+子图: 一个图的一部分。
+全连通图:一个图中的每个点与图中任意其他点均有边连接。
+极大全连通子图: 在全连通子图上添加图上其他任意一点，均破坏其全连通性质。
+
+问题
+给一个连通图,找出其中所有的极大全连通子图，如下图中 {1,2,3},{3,4},{4,5}都是极大全连通子图。
+初步想法
+从一个点开始遍历，扩展全连通子图，直至不能继续扩展。同时将访问过的">
+
+  
+    <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">神经咩的生活哲学</a></h1>
+    <p><a href="/">设计，技术，大脑</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/13/max-connected-graph/">
+  <time datetime="2015-10-13T07:14:37.000Z">
+    10月 13 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">极大全连通子图</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="定义">定义</h1>
+<ul>
+<li>连通图: 图中任意两点均是可达的。</li>
+<li>子图: 一个图的一部分。</li>
+<li>全连通图:一个图中的每个点与图中任意其他点均有边连接。</li>
+<li>极大全连通子图: 在全连通子图上添加图上其他任意一点，均破坏其全连通性质。</li>
+</ul>
+<h1 id="问题">问题</h1>
+<p>给一个连通图,找出其中所有的极大全连通子图，如下图中 {1,2,3},{3,4},{4,5}都是极大全连通子图。<br><img src="http://7b1g0f.com1.z0.glb.clouddn.com/20151013map1.png" alt="图一"></p>
+<h1 id="初步想法">初步想法</h1>
+<p>从一个点开始遍历，扩展全连通子图，直至不能继续扩展。同时将访问过的边标记为已访问。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span> (!isEmpty(vertexList)){</div><div class="line">	Vertex cur = vertexList.peek();</div><div class="line">	Queue maxSubG = <span class="keyword">new</span> LinkedList&lt;Vertex&gt;();</div><div class="line">	maxSubG.add(cur);</div><div class="line">	<span class="comment">//极大连通子图最少两个点</span></div><div class="line">	<span class="keyword">if</span> (isEmpty(cur.Edges())) <span class="keyword">continue</span>;</div><div class="line">	Vertex other = cur.Edges.poll().other(cur);</div><div class="line">	removeEdge(cur, other);</div><div class="line">	<span class="keyword">for</span> (Vertex neighbour : cur.Edges()){</div><div class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> common = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (Vertex nn: neighbour.Edges()){</div><div class="line">			<span class="keyword">if</span> (maxSubG.contains(nn)){</div><div class="line">				common ++;</div><div class="line">			}</div><div class="line">			<span class="keyword">if</span> (nn == cur || nn == other){</div><div class="line">				cnt++; </div><div class="line">			}</div><div class="line">			<span class="keyword">if</span> (cnt &gt;=<span class="number">2</span> ) <span class="keyword">break</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (cnt == <span class="number">2</span> && common == maxSubG.size()){</div><div class="line">			maxSubG.add(neighbour);</div><div class="line">			removeEdge(neighbour, cur);</div><div class="line">			removeEdge(neighbour, other);</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h1 id="Bad_case">Bad case</h1>
+<p>见下图，如果我们用上述的方法可能会漏掉{1，3，4}这个极大连通子图，而误将{1,4}看做一个极大连通子图。<br><img src="http://7b1g0f.com1.z0.glb.clouddn.com/20151013map2.JPG" alt="图二"></p>
+<p>下面我们就要开始着手解决这个问题。首先我们可以发现极大连通子图至少有一条边，这提示我们是否可以按照边而不是顶点来进行遍历呢？其次，我们观察造成我们遗漏{1,3,4}这个子图的罪魁祸首是{1,3}和{3,4}这两条边被错误的删除了。注意到删除{1,3}时，{1,3}除了2以外，还有另一个可扩展的点4，所以其还有利用价值，不能直接删除。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span> (!isEmpty(edgeList)){</div><div class="line">	Edge init = edgeList.peek();</div><div class="line">	Set&lt;Vertex&gt; maxSubG = <span class="keyword">new</span> Set&lt;Vertex&gt;();</div><div class="line">	Vertex one = init.one();</div><div class="line">	Vertex other = init.other();</div><div class="line">	maxSubG.add(one);</div><div class="line">	maxSubG.add(other);</div><div class="line">	<span class="keyword">for</span> (Edge e : union(one.edges(), other.edges()){</div><div class="line">		Set&lt;Vertex&gt; common = intersect(e);</div><div class="line">		<span class="keyword">if</span> (intersect(common, maxSubG).size() = maxSubG.size()){</div><div class="line">			maxSubG.add(e.other(one));</div><div class="line">			<span class="keyword">if</span> (common.size() == maxSubG.size()){</div><div class="line">				edgeList.remove(e);</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">if</span> (intersect(init).size() == maxSubG.size()){</div><div class="line">		edgeList.remove(init);</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tech/">Tech</a>
+  </div>
+
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">yangscar</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'yangscarme';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
