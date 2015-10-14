@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>一个允许快速提取出最大元素的Queue | 神经咩的生活哲学</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="yangscar">
+  
+  
+    <meta name="description" content="问题
+(来自编程之美3.7)实现一个有MaxElement()方法的队列，并使得MaxElement方法的时间复杂度尽可能的低。
+初步想法
+拿一个指针指向最大值，每次enqueue的时候更新这个指针。这个想法比较天真，当dequeue的时候，如果正好这个指针所指的元素要被删除，现在全队列中第二大的元素应该变成新的最大的元素，但是现在找不到。
+优化
+第一步
+那么现在问题变成保证：
+
+当头部不是最大值">
+  
+  <meta name="description" content="问题
+(来自编程之美3.7)实现一个有MaxElement()方法的队列，并使得MaxElement方法的时间复杂度尽可能的低。
+初步想法
+拿一个指针指向最大值，每次enqueue的时候更新这个指针。这个想法比较天真，当dequeue的时候，如果正好这个指针所指的元素要被删除，现在全队列中第二大的元素应该变成新的最大的元素，但是现在找不到。
+优化
+第一步
+那么现在问题变成保证：
+
+当头部不是最大值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个允许快速提取出最大元素的Queue">
+<meta property="og:url" content="http://yangscar.me/2015/10/14/max-element-queue/">
+<meta property="og:site_name" content="神经咩的生活哲学">
+<meta property="og:description" content="问题
+(来自编程之美3.7)实现一个有MaxElement()方法的队列，并使得MaxElement方法的时间复杂度尽可能的低。
+初步想法
+拿一个指针指向最大值，每次enqueue的时候更新这个指针。这个想法比较天真，当dequeue的时候，如果正好这个指针所指的元素要被删除，现在全队列中第二大的元素应该变成新的最大的元素，但是现在找不到。
+优化
+第一步
+那么现在问题变成保证：
+
+当头部不是最大值">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个允许快速提取出最大元素的Queue">
+<meta name="twitter:description" content="问题
+(来自编程之美3.7)实现一个有MaxElement()方法的队列，并使得MaxElement方法的时间复杂度尽可能的低。
+初步想法
+拿一个指针指向最大值，每次enqueue的时候更新这个指针。这个想法比较天真，当dequeue的时候，如果正好这个指针所指的元素要被删除，现在全队列中第二大的元素应该变成新的最大的元素，但是现在找不到。
+优化
+第一步
+那么现在问题变成保证：
+
+当头部不是最大值">
+
+  
+    <link rel="alternate" href="/atom.xml" title="神经咩的生活哲学" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">神经咩的生活哲学</a></h1>
+    <p><a href="/">设计，技术，大脑</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/14/max-element-queue/">
+  <time datetime="2015-10-14T07:11:12.000Z">
+    10月 14 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">一个允许快速提取出最大元素的Queue</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="问题">问题</h1>
+<p>(来自编程之美3.7)实现一个有MaxElement()方法的队列，并使得MaxElement方法的时间复杂度尽可能的低。</p>
+<h1 id="初步想法">初步想法</h1>
+<p>拿一个指针指向最大值，每次enqueue的时候更新这个指针。这个想法比较天真，当dequeue的时候，如果正好这个指针所指的元素要被删除，现在全队列中第二大的元素应该变成新的最大的元素，但是现在找不到。</p>
+<h1 id="优化">优化</h1>
+<h2 id="第一步">第一步</h2>
+<p>那么现在问题变成保证：</p>
+<ol>
+<li>当头部不是最大值时，随便dequeue。</li>
+<li>当头部是最大值时，他应该有指针指向除了他以外谁是最大的。</li>
+</ol>
+<p>所以1)我们应该有一个指针始终指向当前最大值，2)另外每个元素自己拥有一个指针指向他后面的元素中的最大值next_max[]。</p>
+<p>注意到2)中<em>每个元素自己进入队列的时候是无法知道后面的元素的情况的</em>，所以我们可以尝试利用一个后进先出的结构试着让每个元素知道他后面所有元素的情况。</p>
+<p>比如我们现在有队列[3,1,2]。先push 2，最大值是2，没有比他小的next_max[0]=-1 。再push 1，最大值还是2，因为1比现在的最大值小，所以删除无所谓next_max[1]=-1。再push 3, 此时3&gt;2 所以最大值变成了3，next_max[2]=0(指向2所在的位置)。</p>
+<h2 id="第二步">第二步</h2>
+<p>问题又来了，如果这时我们需要enqueue几个元素比如{4,7,5} 怎么办? 理论上我们得等到第一步那个stack清空后才能放入这几个元素。同时这几个新添加的元素中也可能有最大值, 我们也需要记录下来。<strong>这时我们可以回顾一下初步想法</strong>，当队列不发生dequeue时，我们完全可以只用一个变量记录最大值就好了。最后我们考虑到第一步的enqueue需要从后往前放，我们不妨使用一个普通的stack来存储enqueue进来但暂时还不能放入第一步的stack中的元素。</p>
+<h1 id="复杂度">复杂度</h1>
+<p>一个元素的一个生命周期最多被弹3次，所以分摊复杂度是O(1)的。</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Tech/">Tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/Algorithm/">Algorithm</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">yangscar</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var disqus_shortname = 'yangscarme';
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
