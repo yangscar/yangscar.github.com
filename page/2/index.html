@@ -96,6 +96,50 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2014/05/26/circle_interaction/">
+  <time datetime="2014-05-26T14:54:29.000Z">
+    5月 26 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/05/26/circle_interaction/">容斥原理之求圆的交点</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Q: 已知平面上n点，其中无4点共圆，过3点做1个圆，求最多的交点数(不包括这n个点)。</p>
+<p>当n=10的时候，给出具体数值</p>
+<p>A：过三点(A,B,C)做一个圆，其他圆和它的交点最多N个。那么总共最多的交点是$\frac{C(n,3)N}{2}$.</p>
+<p>因为考虑最多，所以不考虑相切的情况。</p>
+<p>N可以分为三个部分，N0:其他圆有0交点在A,B,C中,每个圆和这个圆有额外2个交点 N1:其他圆有1交点在A,B,C中，有额外一个交点; N2: 其他圆有2交点在A,B,C中.N2=0;</p>
+<p>N0: 容斥原理, 求出</p>
+<p>$$|\overline{A_1}\cap\overline{A_2}\cap\overline{A_3}|=C(n,3)-3C(n-1,2)+3C(n-2,1)-1$$</p>
+<p>$$N0 = 2\times[C(n,3)-3C(n-1,2)+3C(n-2,1)-1]$$</p>
+<p>N1: 只过一个点<br>$$<br>|A_1\cap\overline{A_2}\cap\overline{A_3}|=|\overline{A_1}\cap A_2 \cap\overline{A_3}|=|\overline{A_1}\cap\overline{A_2}\cap A_3 |=C(n-1,2)-2C(n-2,1)+1$$</p>
+<p>$$N1 = C(3,1)[C(n-1,2)-2C(n-2,1)+1]$$</p>
+<p>$$Total =\frac{C(n,3)(N0+N1)}{2}$$</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2014/04/12/poj1009/">
   <time datetime="2014-04-12T10:17:53.000Z">
     4月 12 2014
